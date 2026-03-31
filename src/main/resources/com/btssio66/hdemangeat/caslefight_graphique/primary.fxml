@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="700.0" prefWidth="1000.0"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btssio66.hdemangeat.caslefight_graphique.controller.PrimaryController">
+
+   <!-- HEADER -->
+   <StackPane prefHeight="100.0">
+      <children>
+         <ImageView fitHeight="100.0" fitWidth="1000.0" preserveRatio="true">
+            <image>
+               <Image url="@../../../../images/Rotom%20(1).png"/>
+            </image>
+         </ImageView>
+
+         <HBox prefHeight="100.0" prefWidth="1000.0">
+            <children>
+               <ImageView fitHeight="100.0" fitWidth="100.0" opacity="0.7">
+                  <image>
+                     <Image url="@../../../../images/Pokeball-logo.png"/>
+                  </image>
+                  <HBox.margin>
+                     <Insets left="5.0"/>
+                  </HBox.margin>
+               </ImageView>
+
+               <Region prefWidth="260.0"/>
+
+               <ImageView fitHeight="100.0" fitWidth="500.0" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../images/Pok3Fmon_logo.png"/>
+                  </image>
+               </ImageView>
+
+               <Region prefWidth="160.0"/>
+
+               <Button fx:id="BoutonScore"
+                        prefHeight="30.0"
+                        prefWidth="80.0"
+                        opacity="1.00"
+                        text="Score"
+                        onAction="#showScoresAction">
+                    <HBox.margin>
+                        <Insets top="40.0"/>
+                    </HBox.margin>
+                </Button>
+
+               <Region prefWidth="10.0"/>
+
+               <Button fx:id="BoutonQuitter"
+                       prefHeight="30.0"
+                       prefWidth="80.0"
+                       opacity="1.00"
+                       onAction="#Clickedquitter"
+                       text="Quitter">
+                  <HBox.margin>
+                     <Insets top="40.0"/>
+                  </HBox.margin>
+               </Button>
+            </children>
+         </HBox>
+      </children>
+   </StackPane>
+
+   <!-- ZONE COMBAT -->
+   <StackPane>
+      <children>
+         <ImageView fitHeight="606.0" fitWidth="1000.0" preserveRatio="true">
+            <image>
+               <Image url="@../../../../images/stade_galar_pokemon%201000X525.jpg"/>
+            </image>
+         </ImageView>
+
+         <VBox prefHeight="525.0">
+            <!-- SELECTION -->
+            <HBox prefHeight="250.0">
+               <children>
+                  <Region prefWidth="150.0"/>
+
+                  <ImageView fx:id="ImageSalamèche" fitHeight="175.0" fitWidth="175.0"
+                             onMouseClicked="#selectPersoAction">
+                     <image>
+                        <Image url="@../../../../images/Salamèche-carre.png"/>
+                     </image>
+                  </ImageView>
+
+                  <ImageView fx:id="ImageCarapuce" fitHeight="175.0" fitWidth="175.0"
+                             onMouseClicked="#selectPersoAction">
+                     <image>
+                        <Image url="@../../../../images/carapuce.png"/>
+                     </image>
+                  </ImageView>
+
+                  <ImageView fx:id="ImageBulbizarre" fitHeight="175.0" fitWidth="175.0"
+                             onMouseClicked="#selectPersoAction">
+                     <image>
+                        <Image url="@../../../../images/bulbizarre.png"/>
+                     </image>
+                  </ImageView>
+
+                  <ImageView fx:id="ImagePikachu" fitHeight="175.0" fitWidth="175.0"
+                             onMouseClicked="#selectPersoAction">
+                     <image>
+                        <Image url="@../../../../images/Pikachu-carre.png"/>
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+
+            <!-- COMBAT -->
+            <HBox prefHeight="250.0">
+               <children>
+                  <Region prefWidth="50.0"/>
+
+                  <!-- JOUEUR 1 -->
+                  <VBox alignment="CENTER" spacing="5">
+                     <ImageView fx:id="ImagePokeball1"
+                                fitHeight="175.0"
+                                fitWidth="175.0"
+                                opacity="0.7">
+                        <image>
+                           <Image url="@../../../../images/pokeball1.jpeg"/>
+                        </image>
+                     </ImageView>
+                     <ProgressBar fx:id="BarreVieJoueur1"
+                                  prefWidth="140"
+                                  progress="1.0"/>
+                  </VBox>
+
+                  <StackPane prefWidth="125.0">
+                     <ImageView fx:id="ImageAttaque1"
+                                fitHeight="125.0"
+                                fitWidth="125.0"/>
+                  </StackPane>
+
+                  <Pane prefWidth="300.0">
+                     <StackPane>
+                        <TextArea fx:id="TextArena"
+                                  opacity="0.7"
+                                  prefHeight="225.0"
+                                  prefWidth="300.0"/>
+                        <ImageView fx:id="ImageVersus"
+                                   fitHeight="180.0"
+                                   fitWidth="220.0"
+                                   opacity="0.8"/>
+                     </StackPane>
+                  </Pane>
+
+                  <StackPane prefWidth="125.0">
+                     <ImageView fx:id="ImageAttaque2"
+                                fitHeight="125.0"
+                                fitWidth="125.0"/>
+                  </StackPane>
+
+                  <!-- JOUEUR 2 -->
+                  <VBox alignment="CENTER" spacing="5">
+                     <ImageView fx:id="ImagePokeball2"
+                                fitHeight="175.0"
+                                fitWidth="175.0"
+                                opacity="0.7">
+                        <image>
+                           <Image url="@../../../../images/pokeball4.jpeg"/>
+                        </image>
+                     </ImageView>
+                     <ProgressBar fx:id="BarreVieJoueur2"
+                                  prefWidth="140"
+                                  progress="1.0"/>
+                  </VBox>
+               </children>
+            </HBox>
+         </VBox>
+      </children>
+   </StackPane>
+
+   <!-- FOOTER -->
+   <StackPane prefHeight="75.0">
+      <children>
+         <ImageView fitHeight="75.0" fitWidth="1000.0" preserveRatio="true">
+            <image>
+               <Image url="@../../../../images/pokemon-motisma-bas.jpg"/>
+            </image>
+         </ImageView>
+         <Button fx:id="BoutonFight"
+                 prefHeight="40.0"
+                 prefWidth="100.0"
+                 onAction="#Clickedfight"
+                 text="Fight"/>
+      </children>
+   </StackPane>
+
+</VBox>

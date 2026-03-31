@@ -1,0 +1,12 @@
+com\btssio66\hdemangeat\caslefight_graphique\model\Carapuce.class
+com\btssio66\hdemangeat\caslefight_graphique\model\StatistiquePersonnage.class
+com\btssio66\hdemangeat\caslefight_graphique\model\Personnage.class
+com\btssio66\hdemangeat\caslefight_graphique\App.class
+com\btssio66\hdemangeat\caslefight_graphique\model\Salamèche.class
+module-info.class
+com\btssio66\hdemangeat\caslefight_graphique\model\CombatDAO.class
+com\btssio66\hdemangeat\caslefight_graphique\model\Bulbizarre.class
+com\btssio66\hdemangeat\caslefight_graphique\controller\ScoresController.class
+com\btssio66\hdemangeat\caslefight_graphique\controller\PrimaryController.class
+com\btssio66\hdemangeat\caslefight_graphique\model\Pikachu.class
+com\btssio66\hdemangeat\caslefight_graphique\model\DatabaseConnection.class
