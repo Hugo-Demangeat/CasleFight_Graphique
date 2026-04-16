@@ -1,12 +1,16 @@
 package com.btssio66.hdemangeat.caslefight_graphique;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.btssio66.hdemangeat.caslefight_graphique.model.DatabaseConnection;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * JavaFX App
@@ -17,6 +21,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Vérification de la connexion à la base de données
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+            System.out.println("Connexion à la base de données réussie !");
+        } catch (SQLException e) {
+            System.err.println("Erreur de connexion à la base de données : " + e.getMessage());
+            System.err.println("L'application continuera sans sauvegarde des statistiques.");
+            // Ne pas quitter, continuer sans DB
+        }
+
         scene = new Scene(loadFXML("primary"), 1000, 700);
         stage.setScene(scene);
         stage.setResizable(false);

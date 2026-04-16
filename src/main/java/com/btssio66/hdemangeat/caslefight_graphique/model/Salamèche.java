@@ -12,7 +12,7 @@ public class Salamèche extends Personnage {
     }
 
     @Override
-    public void sePresenter() {
-        System.out.println("Salamèche !!! Sala ! Sala !");
+    public String sePresenter() {
+        return "Salamèche !!! Sala ! Sala !";
     }
 }

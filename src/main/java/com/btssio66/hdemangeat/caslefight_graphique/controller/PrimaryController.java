@@ -1,25 +1,31 @@
 package com.btssio66.hdemangeat.caslefight_graphique.controller;
 
-import com.btssio66.hdemangeat.caslefight_graphique.model.*;
 import java.io.IOException;
+import java.util.Random;
+
+import com.btssio66.hdemangeat.caslefight_graphique.model.Bulbizarre;
+import com.btssio66.hdemangeat.caslefight_graphique.model.Carapuce;
+import com.btssio66.hdemangeat.caslefight_graphique.model.CombatDAO;
+import com.btssio66.hdemangeat.caslefight_graphique.model.Personnage;
+import com.btssio66.hdemangeat.caslefight_graphique.model.Pikachu;
+import com.btssio66.hdemangeat.caslefight_graphique.model.Salamèche;
+
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
-
-import java.util.Random;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class PrimaryController {
 
@@ -43,7 +49,10 @@ public class PrimaryController {
 
     private int selectionIndex = 0;
     private boolean combatEnCours = false;
+    private boolean combatTermine = false;
     private int currentAttacker; // 1 = joueur1, 2 = joueur2
+    private double totalDegatsInfligesJoueur1 = 0;
+    private double totalDegatsInfligesJoueur2 = 0;
 
     private final Random random = new Random();
 
@@ -96,8 +105,8 @@ public class PrimaryController {
 
     @FXML
     public void selectPersoAction(MouseEvent event) {
-        if (combatEnCours) {
-            TextArena.appendText("⚠️ Impossible de changer de Pokémon pendant le combat !\n");
+        if (combatEnCours || combatTermine) {
+            TextArena.appendText("⚠️ Impossible de changer de Pokémon pendant le combat ou juste après la fin d'un combat !\n");
             return;
         }
 
@@ -118,12 +127,14 @@ public class PrimaryController {
             ImagePokeball1.setOpacity(1.0);
             BarreVieJoueur1.setProgress(1.0);
             TextArena.appendText("Joueur 1 choisit " + p.getNom() + "\n");
+            TextArena.appendText(p.sePresenter() + "\n");
         } else {
             joueur2 = p;
             ImagePokeball2.setImage(image);
             ImagePokeball2.setOpacity(1.0);
             BarreVieJoueur2.setProgress(1.0);
             TextArena.appendText("Joueur 2 choisit " + p.getNom() + "\n");
+            TextArena.appendText(p.sePresenter() + "\n");
         }
 
         selectionIndex++;
@@ -136,10 +147,17 @@ public class PrimaryController {
             return;
         }
 
+        if (combatTermine) {
+            TextArena.appendText("⚠️ Le combat est terminé. Attendez le nouveau tour de sélection.\n");
+            return;
+        }
+
         if (!combatEnCours) {
             combatEnCours = true;
             joueur1.setVie(100);
             joueur2.setVie(100);
+            totalDegatsInfligesJoueur1 = 0;
+            totalDegatsInfligesJoueur2 = 0;
             currentAttacker = random.nextBoolean() ? 1 : 2;
 
             BarreVieJoueur1.setProgress(1.0);
@@ -169,6 +187,11 @@ public class PrimaryController {
         Personnage defenseur = getDefender();
 
         int degats = attaquant.frapper();
+        if (currentAttacker == 1) {
+            totalDegatsInfligesJoueur1 += degats;
+        } else {
+            totalDegatsInfligesJoueur2 += degats;
+        }
         defenseur.setVie(Math.max(0, defenseur.getVie() - degats));
 
         getDefenderProgressBar().setProgress(defenseur.getVie() / 100.0);
@@ -240,8 +263,17 @@ public class PrimaryController {
         gagnantImg.setImage(imgGagne);
         perdantImg.setImage(imgPerdu);
 
+        double degatsGagnant = (gagnant == joueur1) ? totalDegatsInfligesJoueur1 : totalDegatsInfligesJoueur2;
+        double degatsPerdant = (perdant == joueur1) ? totalDegatsInfligesJoueur1 : totalDegatsInfligesJoueur2;
+
+        combatTermine = true;
+
         // 🔹 Enregistrement du résultat en base
-        CombatDAO.enregistrerResultat(gagnant, perdant);
+        boolean sauvegardeReussie = CombatDAO.enregistrerResultat(gagnant, perdant, degatsGagnant, degatsPerdant);
+        if (!sauvegardeReussie) {
+            String error = CombatDAO.getLastErrorMessage();
+            TextArena.appendText("⚠️ Résultat non sauvegardé : " + (error != null ? error : "base de données indisponible") + "\n");
+        }
 
         TextArena.appendText("🏆 " + gagnant.getNom() + " gagne !\n");
 
@@ -260,6 +292,10 @@ public class PrimaryController {
         joueur1 = null;
         joueur2 = null;
         selectionIndex = 0;
+        totalDegatsInfligesJoueur1 = 0;
+        totalDegatsInfligesJoueur2 = 0;
+        combatEnCours = false;
+        combatTermine = false;
 
         BarreVieJoueur1.setProgress(1.0);
         BarreVieJoueur2.setProgress(1.0);

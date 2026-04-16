@@ -1,69 +1,94 @@
 package com.btssio66.hdemangeat.caslefight_graphique.model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CombatDAO {
 
-    public static boolean enregistrerResultat(Personnage gagnant, Personnage perdant) {
-    String sql = "INSERT INTO resultats_combats (nom_gagnant, nom_perdant, vie_restante_gagnant, date_combat) VALUES (?, ?, ?, ?)";
-    try (Connection conn = DatabaseConnection.getInstance().getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+    private static String lastErrorMessage = null;
 
-        stmt.setString(1, gagnant.getNom());
-        stmt.setString(2, perdant.getNom());
-        stmt.setInt(3, gagnant.getVie());
-        stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-
-        int rowsAffected = stmt.executeUpdate();
-        System.out.println("SQL exécuté : " + stmt);
-        System.out.println("Lignes affectées : " + rowsAffected);
-
-        if (rowsAffected > 0) {
-            System.out.println("Résultat enregistré : " + gagnant.getNom() + " a vaincu " + perdant.getNom() + " avec " + gagnant.getVie() + " PV restants");
-            return true;
-        }
-
-    } catch (SQLException e) {
-        System.err.println("Erreur SQL : " + e.getMessage());
-        e.printStackTrace();
+    public static boolean enregistrerResultat(Personnage gagnant, Personnage perdant, double degatsGagnant, double degatsPerdant) {
+        boolean successGagnant = upsertStatistique(gagnant.getNom(), 1, 0, degatsGagnant);
+        boolean successPerdant = upsertStatistique(perdant.getNom(), 0, 1, degatsPerdant);
+        return successGagnant && successPerdant;
     }
-    return false;
-}
 
+    private static boolean upsertStatistique(String personnage, int victoiresDelta, int defaitesDelta, double degatsDelta) {
+        String updateSql = "UPDATE resultats_combats "
+                         + "SET nb_victoires = nb_victoires + ?, "
+                         + "nb_defaites = nb_defaites + ?, "
+                         + "total_degats_infliges = total_degats_infliges + ? "
+                         + "WHERE personnage = ?";
+        String insertSql = "INSERT INTO resultats_combats (personnage, nb_victoires, nb_defaites, total_degats_infliges) "
+                         + "VALUES (?, ?, ?, ?)";
 
-    // Récupère les statistiques pour chaque personnage
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+
+            updateStmt.setInt(1, victoiresDelta);
+            updateStmt.setInt(2, defaitesDelta);
+            updateStmt.setDouble(3, degatsDelta);
+            updateStmt.setString(4, personnage);
+
+            int updated = updateStmt.executeUpdate();
+            if (updated > 0) {
+                lastErrorMessage = null;
+                return true;
+            }
+
+            try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+                insertStmt.setString(1, personnage);
+                insertStmt.setInt(2, victoiresDelta);
+                insertStmt.setInt(3, defaitesDelta);
+                insertStmt.setDouble(4, degatsDelta);
+                int inserted = insertStmt.executeUpdate();
+                if (inserted > 0) {
+                    lastErrorMessage = null;
+                    return true;
+                }
+            }
+
+            lastErrorMessage = "Aucune ligne insérée.";
+            return false;
+
+        } catch (SQLException e) {
+            lastErrorMessage = e.getMessage();
+            System.err.println("Erreur lors de l'enregistrement du résultat : " + lastErrorMessage);
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static String getLastErrorMessage() {
+        return lastErrorMessage;
+    }
+
     public static List<StatistiquePersonnage> getStatistiques() {
         List<StatistiquePersonnage> statistiques = new ArrayList<>();
-        String sql = "SELECT nom, "
-                   + "SUM(victoires) as total_victoires, "
-                   + "SUM(defaites) as total_defaites, "
-                   + "SUM(points_vie) as total_points "
-                   + "FROM ("
-                   + " SELECT nom_gagnant as nom, COUNT(*) as victoires, 0 as defaites, SUM(vie_restante_gagnant) as points_vie FROM resultats_combats GROUP BY nom_gagnant "
-                   + " UNION ALL "
-                   + " SELECT nom_perdant as nom, 0 as victoires, COUNT(*) as defaites, 0 as points_vie FROM resultats_combats GROUP BY nom_perdant "
-                   + ") AS stats "
-                   + "GROUP BY nom "
-                   + "ORDER BY total_victoires DESC, total_points DESC";
+        String sql = "SELECT personnage, nb_victoires, nb_defaites, total_degats_infliges "
+                   + "FROM resultats_combats "
+                   + "ORDER BY nb_victoires DESC, total_degats_infliges DESC";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                String nom = rs.getString("nom");
-                int victoires = rs.getInt("total_victoires");
-                int defaites = rs.getInt("total_defaites");
-                int totalPoints = rs.getInt("total_points");
-
-                statistiques.add(new StatistiquePersonnage(nom, victoires, defaites, totalPoints));
+                String nom = rs.getString("personnage");
+                int victoires = rs.getInt("nb_victoires");
+                int defaites = rs.getInt("nb_defaites");
+                double totalDegats = rs.getDouble("total_degats_infliges");
+                String ratioVD = victoires + "-" + defaites;
+                statistiques.add(new StatistiquePersonnage(nom, victoires, defaites, totalDegats, ratioVD));
             }
 
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des statistiques : " + e.getMessage());
-            e.printStackTrace();
+            // Retourner une liste vide
         }
 
         return statistiques;

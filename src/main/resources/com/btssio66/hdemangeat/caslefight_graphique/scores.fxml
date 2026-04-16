@@ -32,7 +32,7 @@
                 <TableColumn fx:id="nomColumn" prefWidth="150.0" text="Personnage"/>
                 <TableColumn fx:id="victoiresColumn" prefWidth="100.0" text="Victoires"/>
                 <TableColumn fx:id="defaitesColumn" prefWidth="100.0" text="Défaites"/>
-                <TableColumn fx:id="totalPVColumn" prefWidth="120.0" text="Total PV"/>
+                <TableColumn fx:id="totalPVColumn" prefWidth="120.0" text="Total dégâts"/>
                 <TableColumn fx:id="ratioColumn" prefWidth="130.0" text="Ratio V/D"/>
             </columns>
             <columnResizePolicy>

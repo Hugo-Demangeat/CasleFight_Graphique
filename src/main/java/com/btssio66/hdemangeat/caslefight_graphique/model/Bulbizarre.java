@@ -12,7 +12,7 @@ public class Bulbizarre extends Personnage {
     }
 
     @Override
-    public void sePresenter() {
-        System.out.println("Bulbizarre !!! Bulbi ! Bulbi !");
+    public String sePresenter() {
+        return "Bulbizarre !!! Bulbi ! Bulbi !";
     }
 }

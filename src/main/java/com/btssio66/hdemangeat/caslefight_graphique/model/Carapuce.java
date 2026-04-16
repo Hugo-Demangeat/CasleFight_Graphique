@@ -12,7 +12,7 @@ public class Carapuce extends Personnage {
     }
 
     @Override
-    public void sePresenter() {
-        System.out.println("Carapuce !!! Cara ! Cara !");
+    public String sePresenter() {
+        return "Carapuce !!! Cara ! Cara !";
     }
 }

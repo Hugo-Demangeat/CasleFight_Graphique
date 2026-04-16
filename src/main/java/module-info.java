@@ -9,6 +9,7 @@ module com.btssio66.hdemangeat.caslefight_graphique {
     // Permet à FXML d'accéder aux packages
     opens com.btssio66.hdemangeat.caslefight_graphique to javafx.fxml;
     opens com.btssio66.hdemangeat.caslefight_graphique.controller to javafx.fxml;
+    opens com.btssio66.hdemangeat.caslefight_graphique.model to javafx.fxml, javafx.base;
 
     // Exports pour pouvoir accéder aux classes depuis l'extérieur du module
     exports com.btssio66.hdemangeat.caslefight_graphique;

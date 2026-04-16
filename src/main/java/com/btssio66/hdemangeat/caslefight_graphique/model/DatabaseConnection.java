@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     // Connexion directe au serveur MySQL de XAMPP
-    private static final String URL = "jdbc:mysql://localhost:3306/castlefight?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/castlefight?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true";
     private static final String USER = "root"; // ou "hdemangeat" si tu as créé cet utilisateur
     private static final String PASSWORD = ""; // vide par défaut pour root sous XAMPP
 

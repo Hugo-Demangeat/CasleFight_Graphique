@@ -26,5 +26,5 @@ public abstract class Personnage {
     // frappe sans argument
     public abstract int frapper();
 
-    public abstract void sePresenter();
+    public abstract String sePresenter();
 }

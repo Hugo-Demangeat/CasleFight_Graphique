@@ -12,7 +12,7 @@ public class Pikachu extends Personnage {
     }
 
     @Override
-    public void sePresenter() {
-        System.out.println("Pikachu !!! Pika ! Pika !");
+    public String sePresenter() {
+        return "Pikachu !!! Pika ! Pika !";
     }
 }
