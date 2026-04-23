@@ -52,33 +52,9 @@ Ouvrez phpMyAdmin ou MySQL Workbench et importez le fichier `castlefight.sql` fo
 
 Le projet utilise la base de données `castlefight` et la table `resultats_combats`.
 
-### 3. Configurer la connexion MySQL
+### 3. Lancer l'application
 
-Le code utilise les paramètres suivants dans `DatabaseConnection.java` :
-
-```java
-private static final String URL = "jdbc:mysql://localhost:3306/castlefight?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true";
-private static final String USER = "root";
-private static final String PASSWORD = "";
-```
-
-Si votre configuration MySQL est différente, modifiez ces valeurs dans `src/main/java/com/btssio66/hdemangeat/caslefight_graphique/model/DatabaseConnection.java`.
-
-### 4. Installer les dépendances Maven
-
-```bash
-mvn clean install
-```
-
-## Exécution
-
-### Lancer l'application
-
-Utilisez la commande suivante pour démarrer l'application JavaFX :
-
-```bash
-mvn javafx:run
-```
+Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ### Usage
 
