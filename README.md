@@ -52,6 +52,8 @@ Ouvrez phpMyAdmin ou MySQL Workbench et importez le fichier `castlefight.sql` fo
 
 Le projet utilise la base de données `castlefight` et la table `resultats_combats`.
 
+![MCD](image-readme/MCD.png)
+
 ### 3. Lancer l'application
 
 Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
