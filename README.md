@@ -155,7 +155,7 @@ src/
 - **Java 11**
 - **JavaFX 13**
 - **Maven**
-- **MySQL / MariaDB**
+- **MySQL**
 - **FXML** pour l'interface graphique
 
 ## Auteur
