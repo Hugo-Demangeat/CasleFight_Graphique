@@ -54,10 +54,6 @@ Le projet utilise la base de données `castlefight` et la table `resultats_comba
 
 ![MCD](image-readme/MCD.png)
 
-### 3. Lancer l'application
-
-Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
-
 ## Guide d'utilisation
 
 ### 1. Lancer l'application
