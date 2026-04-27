@@ -60,7 +60,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ## Guide d'utilisation
 
-### Lancer l'application
+### 1. Lancer l'application
 
 - Ouvrez le projet dans votre IDE (ex : NetBeans)
 - Exécutez l’application JavaFX
@@ -70,7 +70,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ---
 
-### Sélection des Pokémon
+### 2. Sélection des Pokémon
 
 - Choisissez un Pokémon pour le joueur 1
 - Choisissez un Pokémon pour le joueur 2
@@ -84,7 +84,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ---
 
-### Lancer un combat
+### 3. Lancer un combat
 
 - Cliquez sur le bouton `Fight`
 - Le premier attaquant est choisi aléatoirement
@@ -95,7 +95,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ---
 
-### Suivre le combat
+### 4. Suivre le combat
 
 - Cliquez plusieurs fois sur `Fight` pour continuer le combat
 - Les informations affichées :
@@ -107,7 +107,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ---
 
-### Consulter les statistiques
+### 5. Consulter les statistiques
 
 - Ouvrez la fenêtre des statistiques
 - Consultez :
@@ -120,7 +120,7 @@ Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
 ---
 
-### Fonctionnement sans base de données
+### 6. Fonctionnement sans base de données
 
 - L'application fonctionne même sans MySQL
 - Les combats restent jouables
