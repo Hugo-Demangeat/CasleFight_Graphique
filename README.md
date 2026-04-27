@@ -58,13 +58,73 @@ Le projet utilise la base de données `castlefight` et la table `resultats_comba
 
 Ouvrer le dossier CasleFight_Graphique dans Apache NetBeans.
 
-### Usage
+## Guide d'utilisation
 
-1. Sélectionnez un Pokémon pour le joueur 1
-2. Sélectionnez un Pokémon pour le joueur 2
-3. Cliquez sur `Fight` pour lancer le combat
-4. Répétez pour voir le déroulement du combat dans la zone de texte
-5. Ouvrez la fenêtre de statistiques pour consulter les résultats enregistrés
+### Lancer l'application
+
+- Ouvrez le projet dans votre IDE (ex : NetBeans)
+- Exécutez l’application JavaFX
+- La fenêtre principale du jeu s’affiche
+
+![Home](image-readme/Home.png)
+
+---
+
+### Sélection des Pokémon
+
+- Choisissez un Pokémon pour le joueur 1
+- Choisissez un Pokémon pour le joueur 2
+- Pokémon disponibles :
+  - Salamèche
+  - Carapuce
+  - Bulbizarre
+  - Pikachu
+
+![Choise](image-readme/Choise.png)
+
+---
+
+### Lancer un combat
+
+- Cliquez sur le bouton `Fight`
+- Le premier attaquant est choisi aléatoirement
+- Le combat se déroule tour par tour
+- Les dégâts et points de vie restants sont affichés
+
+![Fight](image-readme/Fight.png)
+
+---
+
+### Suivre le combat
+
+- Cliquez plusieurs fois sur `Fight` pour continuer le combat
+- Les informations affichées :
+  - Dégâts infligés
+  - Points de vie restants
+  - Résultat du combat
+
+![Win](image-readme/Win.png)
+
+---
+
+### Consulter les statistiques
+
+- Ouvrez la fenêtre des statistiques
+- Consultez :
+  - Victoires
+  - Défaites
+  - Dégâts totaux infligés
+- Données enregistrées dans MySQL
+
+![Stat](image-readme/Stat.png)
+
+---
+
+### Fonctionnement sans base de données
+
+- L'application fonctionne même sans MySQL
+- Les combats restent jouables
+- Les statistiques ne sont pas sauvegardées
 
 ## Structure du projet
 
