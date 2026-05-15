@@ -7,9 +7,14 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     // Connexion directe au serveur MySQL de XAMPP
-    private static final String URL = "jdbc:mysql://localhost:3306/castlefight?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true";
-    private static final String USER = "root"; // ou "hdemangeat" si tu as créé cet utilisateur
-    private static final String PASSWORD = ""; // vide par défaut pour root sous XAMPP
+    //private static final String URL = "jdbc:mysql://localhost:3306/castlefight?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true";
+    //private static final String USER = "root"; // ou "hdemangeat" si tu as créé cet utilisateur
+    //private static final String PASSWORD = ""; // vide par défaut pour root sous XAMPP
+    
+    // Connexion directe au serveur MySQL de O2switch
+    private static final String URL = "jdbc:mysql://jasmin.o2switch.net:3306/kuda8918_hugofight?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true";
+    private static final String USER = "kuda8918_hugofightuser";
+    private static final String PASSWORD = "!dVE8YIT^e!co*Fc";
 
     private static DatabaseConnection instance = null;
     private Connection connection = null;
