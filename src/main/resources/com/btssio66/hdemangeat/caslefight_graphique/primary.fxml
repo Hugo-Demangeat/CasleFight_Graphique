@@ -93,21 +93,21 @@
                   <ImageView fx:id="ImageSalamèche" fitHeight="175.0" fitWidth="175.0"
                              onMouseClicked="#selectPersoAction">
                      <image>
-                        <Image url="@../../../../images/Salamèche-carre.png"/>
+                        <Image url="@../../../../images/Salamche-carre.png"/>
                      </image>
                   </ImageView>
 
                   <ImageView fx:id="ImageCarapuce" fitHeight="175.0" fitWidth="175.0"
                              onMouseClicked="#selectPersoAction">
                      <image>
-                        <Image url="@../../../../images/carapuce.png"/>
+                        <Image url="@../../../../images/Carapuce.png"/>
                      </image>
                   </ImageView>
 
                   <ImageView fx:id="ImageBulbizarre" fitHeight="175.0" fitWidth="175.0"
                              onMouseClicked="#selectPersoAction">
                      <image>
-                        <Image url="@../../../../images/bulbizarre.png"/>
+                        <Image url="@../../../../images/Bulbizarre.png"/>
                      </image>
                   </ImageView>
 

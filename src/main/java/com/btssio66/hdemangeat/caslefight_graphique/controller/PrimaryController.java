@@ -57,18 +57,18 @@ public class PrimaryController {
     private final Random random = new Random();
 
     // Pokémon images
-    private final Image imgSalamèche = new Image(getClass().getResourceAsStream("/images/Salamèche-carre.png"));
+    private final Image imgSalamèche = new Image(getClass().getResourceAsStream("/images/Salamche-carre.png"));
     private final Image imgCarapuce = new Image(getClass().getResourceAsStream("/images/Carapuce.png"));
     private final Image imgBulbizarre = new Image(getClass().getResourceAsStream("/images/Bulbizarre.png"));
     private final Image imgPikachu = new Image(getClass().getResourceAsStream("/images/Pikachu-carre.png"));
     private final Image imgVersus = new Image(getClass().getResourceAsStream("/images/Versus.png"));
 
     // Attaques
-    private final Image imgDegat = new Image(getClass().getResourceAsStream("/images/dégat.png"));
+    private final Image imgDegat = new Image(getClass().getResourceAsStream("/images/degat.png"));
     private final Image imgFouetLiane = new Image(getClass().getResourceAsStream("/images/fouet-liane.png"));
-    private final Image imgFlaméche = new Image(getClass().getResourceAsStream("/images/Flaméche.png"));
+    private final Image imgFlaméche = new Image(getClass().getResourceAsStream("/images/Flamche.png"));
     private final Image imgBoule_Elek = new Image(getClass().getResourceAsStream("/images/Boule_Elek.png"));
-    private final Image imgBulleEau = new Image(getClass().getResourceAsStream("/images/bulle d'eau.png"));
+    private final Image imgBulleEau = new Image(getClass().getResourceAsStream("/images/bulle-eau.png"));
     private final Image imgGagne = new Image(getClass().getResourceAsStream("/images/gagner.png"));
     private final Image imgPerdu = new Image(getClass().getResourceAsStream("/images/perdue.png"));
 

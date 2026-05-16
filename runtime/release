@@ -1,0 +1,2 @@
+JAVA_VERSION="25.0.2"
+MODULES="java.base java.logging java.transaction.xa java.xml java.sql java.datatransfer java.prefs java.desktop javafx.base javafx.graphics javafx.controls java.scripting javafx.fxml com.btssio66.hdemangeat.caslefight_graphique java.security.sasl java.naming"
